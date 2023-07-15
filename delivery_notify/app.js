@@ -1,10 +1,12 @@
 function myFunction() {
-    const threads = GmailApp.search('subject:(お荷物お届け完了のお知らせ)');
+    const threads = GmailApp.search('{subject:(お荷物お届け完了のお知らせ) subject:(配達完了:ご注文商品の配達が完了しました。)}');
     let unreadMailExists = false;
     // 未読メッセージがあるかチェック
     for (thread of threads) {
         if (thread.isUnread()) {
             unreadMailExists = true;
+            // 既読に更新する
+            GmailApp.markThreadRead(thread);
         }
     }
     if (unreadMailExists) {
